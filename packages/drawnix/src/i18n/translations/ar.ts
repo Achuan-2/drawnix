@@ -64,6 +64,10 @@ const arTranslations: Translations = {
     "general.menu": "قائمة التطبيق",
     "general.duplicate": "تكرار",
     "general.delete": "حذف",
+    "general.saved": "تم الحفظ",
+    "general.autoSave": "حفظ تلقائي",
+    "general.lastSaved": "آخر حفظ",
+    "general.autoSaved": "وقت الحفظ التلقائي",
 
     // Language
     "language.switcher": "اللغة",

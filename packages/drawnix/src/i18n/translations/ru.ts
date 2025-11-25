@@ -60,10 +60,14 @@ const ruTranslations: Translations = {
 
   // General
   'general.undo': 'Отменить',
-  'general.redo': 'Вернуть',
+  'general.redo': 'Повторить',
   'general.menu': 'Меню приложения',
   'general.duplicate': 'Дублировать',
   'general.delete': 'Удалить',
+  'general.saved': 'Сохранено',
+  'general.autoSave': 'Автосохранение',
+  'general.lastSaved': 'Последнее сохранение',
+  'general.autoSaved': 'Время автосохранения',
   
   // Language
   'language.switcher': 'Language',

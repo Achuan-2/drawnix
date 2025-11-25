@@ -46,11 +46,13 @@ export type DrawnixState = {
 export const DrawnixContext = createContext<{
   appState: DrawnixState;
   setAppState: (appState: DrawnixState) => void;
+  onSave?: () => void;
 } | null>(null);
 
 export const useDrawnix = (): {
   appState: DrawnixState;
   setAppState: (appState: DrawnixState) => void;
+  onSave?: () => void;
 } => {
   const context = useContext(DrawnixContext);
 

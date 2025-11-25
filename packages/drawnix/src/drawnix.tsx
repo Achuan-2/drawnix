@@ -21,6 +21,7 @@ import { CreationToolbar } from './components/toolbar/creation-toolbar';
 import { ZoomToolbar } from './components/toolbar/zoom-toolbar';
 import { PopupToolbar } from './components/toolbar/popup-toolbar/popup-toolbar';
 import { AppToolbar } from './components/toolbar/app-toolbar/app-toolbar';
+import { SaveTimeIndicator } from './components/toolbar/save-time-indicator';
 import classNames from 'classnames';
 import './styles/index.scss';
 import { buildDrawnixHotkeyPlugin } from './plugins/with-hotkey';
@@ -52,6 +53,7 @@ export type DrawnixProps = {
   onThemeChange?: (value: ThemeColorMode) => void;
   afterInit?: (board: PlaitBoard) => void;
   tutorial?: boolean;
+  onSave?: () => void;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const Drawnix: React.FC<DrawnixProps> = ({
@@ -65,6 +67,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
   onValueChange,
   afterInit,
   tutorial = false,
+  onSave,
 }) => {
   const options: PlaitBoardOptions = {
     readonly: false,
@@ -104,7 +107,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
     withMind,
     withMindExtend,
     withCommonPlugin,
-    buildDrawnixHotkeyPlugin(updateAppState),
+    buildDrawnixHotkeyPlugin(updateAppState, onSave),
     withFreehand,
     buildPencilPlugin(updateAppState),
     buildTextLinkPlugin(updateAppState),
@@ -114,7 +117,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
 
   return (
     <I18nProvider>
-      <DrawnixContext.Provider value={{ appState, setAppState }}>
+      <DrawnixContext.Provider value={{ appState, setAppState, onSave }}>
         <div
           className={classNames('drawnix', {
             'drawnix--mobile': appState.isMobile,
@@ -148,6 +151,7 @@ export const Drawnix: React.FC<DrawnixProps> = ({
                 )}
             </Board>
             <AppToolbar></AppToolbar>
+            <SaveTimeIndicator></SaveTimeIndicator>
             <CreationToolbar></CreationToolbar>
             <ZoomToolbar></ZoomToolbar>
             <ThemeToolbar></ThemeToolbar>

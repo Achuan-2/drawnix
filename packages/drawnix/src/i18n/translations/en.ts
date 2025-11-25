@@ -64,6 +64,10 @@ const enTranslations: Translations = {
   'general.menu': 'App Menu',
   'general.duplicate': 'Duplicate',
   'general.delete': 'Delete',
+  'general.saved': 'Saved',
+  'general.autoSave': 'Auto-saved',
+  'general.lastSaved': 'Last saved time',
+  'general.autoSaved': 'Auto-saved time',
 
   // Language
   'language.switcher': 'Language',

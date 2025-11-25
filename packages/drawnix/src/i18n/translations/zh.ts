@@ -64,6 +64,10 @@ const zhTranslations: Translations = {
   'general.menu': '应用菜单',
   'general.duplicate': '复制',
   'general.delete': '删除',
+  'general.saved': '已保存',
+  'general.autoSave': '自动保存',
+  'general.lastSaved': '最后保存时间',
+  'general.autoSaved': '自动保存时间',
 
   // Language
   'language.switcher': 'Language',

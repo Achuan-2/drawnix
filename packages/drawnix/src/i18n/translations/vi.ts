@@ -58,14 +58,16 @@ const viTranslations: Translations = {
     'color.forestGreen': 'Xanh rừng',
     'color.lightGray': 'Xám nhạt',
 
-    // General
-    'general.undo': 'Hoàn tác',
-    'general.redo': 'Làm lại',
-    'general.menu': 'Menu ứng dụng',
-    'general.duplicate': 'Nhân bản',
-    'general.delete': 'Xóa',
-
-    // Language
+  // General
+  'general.undo': 'Hoàn tác',
+  'general.redo': 'Làm lại',
+  'general.menu': 'Menu ứng dụng',
+  'general.duplicate': 'Nhân bản',
+  'general.delete': 'Xóa',
+  'general.saved': 'Đã lưu',
+  'general.autoSave': 'Tự động lưu',
+  'general.lastSaved': 'Lần lưu cuối',
+  'general.autoSaved': 'Thời gian tự động lưu',    // Language
     'language.switcher': 'Ngôn ngữ',
     'language.chinese': '中文',
     'language.english': 'English',

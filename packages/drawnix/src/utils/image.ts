@@ -21,6 +21,17 @@ export const saveAsSvg = (board: PlaitBoard) => {
   });
 };
 
+export const getBoardSVGString = (board: PlaitBoard): Promise<string> => {
+  return toSvgData(board, {
+    fillStyle: 'transparent',
+    padding: 20,
+    ratio: 4,
+    elements: undefined,
+    inlineStyleClassNames: '.plait-text-container',
+    styleNames: ['position'],
+  });
+};
+
 export const saveAsImage = (board: PlaitBoard, isTransparent: boolean) => {
   const selectedElements = getSelectedElements(board);
   boardToImage(board, {

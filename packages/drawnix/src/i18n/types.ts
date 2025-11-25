@@ -68,6 +68,10 @@ export interface Translations {
   'general.menu': string;
   'general.duplicate': string;
   'general.delete': string;
+  'general.saved': string;
+  'general.autoSave': string;
+  'general.lastSaved': string;
+  'general.autoSaved': string;
 
   // Language
   'language.switcher': string;

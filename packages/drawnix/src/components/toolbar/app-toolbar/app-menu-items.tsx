@@ -29,11 +29,17 @@ import { getShortcutKey } from '../../../utils/common';
 export const SaveToFile = () => {
   const board = useBoard();
   const { t } = useI18n();
+  const { onSave } = useDrawnix();
+
   return (
     <MenuItem
       data-testid="save-button"
       onSelect={() => {
-        saveAsJSON(board);
+        if (onSave) {
+          onSave();
+        } else {
+          saveAsJSON(board);
+        }
       }}
       icon={SaveFileIcon}
       aria-label={t('menu.saveFile')}

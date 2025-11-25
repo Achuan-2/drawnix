@@ -14,7 +14,8 @@ import { FreehandShape } from './freehand/type';
 import { ArrowLineShape, BasicShapes } from '@plait/draw';
 
 export const buildDrawnixHotkeyPlugin = (
-  updateAppState: (appState: Partial<DrawnixState>) => void
+  updateAppState: (appState: Partial<DrawnixState>) => void,
+  onSave?: () => void
 ) => {
   const withDrawnixHotkey = (board: PlaitBoard) => {
     const { globalKeyDown, keyDown } = board;
@@ -34,7 +35,11 @@ export const buildDrawnixHotkeyPlugin = (
           return;
         }
         if (isHotkey(['mod+s'], { byKey: true })(event)) {
-          saveAsJSON(board);
+          if (onSave) {
+            onSave();
+          } else {
+            saveAsJSON(board);
+          }
           event.preventDefault();
           return;
         }

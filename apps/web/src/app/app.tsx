@@ -52,12 +52,14 @@ export function App({ initialValue, onChange, onSave }: AppProps) {
         const newValue = val as AppValue;
         setValue(newValue);
         valueRef.current = newValue; // 同步更新 ref
-        // 调用 onChange 回调（如果有的话）
-        if (onSave) {
-          onSave(newValue);
-        }
+
         if (newValue.children && newValue.children.length > 0) {
           setTutorial(false);
+        }
+
+        // 调用 onChange 回调
+        if (onChange) {
+          onChange(newValue);
         }
       }}
       onSave={() => {

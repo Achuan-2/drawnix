@@ -70,7 +70,6 @@ export function App({ initialValue, onChange, onSave }: AppProps) {
       }}
       tutorial={tutorial}
       afterInit={(board) => {
-        console.log('board initialized');
         (window as any).drawnixApi = {
             exportImage: async (format: 'png' | 'svg') => {
                 if (format === 'svg') {

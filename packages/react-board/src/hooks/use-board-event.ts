@@ -71,22 +71,76 @@ const useBoardEvent = (
   );
 
   const isInitialized = useRef(false);
+  const lastScrollPosition = useRef({ scrollLeft: 0, scrollTop: 0 });
+
+  // 保存滚动位置
+  useEffect(() => {
+    const container = viewportContainerRef.current;
+    if (!container) return;
+
+    const saveScrollPosition = () => {
+      if (container.scrollLeft !== 0 || container.scrollTop !== 0) {
+        lastScrollPosition.current = {
+          scrollLeft: container.scrollLeft,
+          scrollTop: container.scrollTop,
+        };
+      }
+    };
+
+    // 定期保存滚动位置
+    const interval = setInterval(saveScrollPosition, 500);
+    container.addEventListener('scroll', saveScrollPosition);
+
+    return () => {
+      clearInterval(interval);
+      container.removeEventListener('scroll', saveScrollPosition);
+    };
+  }, [viewportContainerRef]);
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
       if (!isInitialized.current) {
         isInitialized.current = true;
         return;
       }
+      
+      const entry = entries[0];
+      const { width, height } = entry.contentRect;
+      
+      // 如果容器尺寸为 0，说明被隐藏了，不处理
+      if (width === 0 || height === 0) {
+        return;
+      }
+
+      // 保存当前 viewport
+      const currentViewport = { ...board.viewport };
+      const savedScroll = { ...lastScrollPosition.current };
+      
       initializeViewportContainer(board);
       initializeViewBox(board);
       updateViewportOffset(board);
+      
+      // 恢复 viewport 和滚动位置
+      if (currentViewport.zoom && currentViewport.origination) {
+        board.viewport = currentViewport;
+        updateViewportOffset(board);
+      }
+      
+      // 使用 requestAnimationFrame 确保在下一帧恢复滚动位置
+      // 这是解决 display:none 恢复后滚动条位置错误的关键
+      requestAnimationFrame(() => {
+        const container = viewportContainerRef.current;
+        if (container && (savedScroll.scrollLeft !== 0 || savedScroll.scrollTop !== 0)) {
+          container.scrollLeft = savedScroll.scrollLeft;
+          container.scrollTop = savedScroll.scrollTop;
+        }
+      });
     });
     resizeObserver.observe(PlaitBoard.getBoardContainer(board));
     return () => {
       resizeObserver && (resizeObserver as ResizeObserver).disconnect();
     };
-  }, []);
+  }, [viewportContainerRef]);
 };
 
 export default useBoardEvent;
